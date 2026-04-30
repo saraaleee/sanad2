@@ -5,7 +5,18 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>منصة سَنَد للتمكين المهني</title>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet" media="all"/>
+<style>
+  /* Fallback fonts while Google Fonts loads */
+  @font-face {
+    font-family: 'Tajawal';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Tajawal'), local('Arial'), local('Tahoma');
+  }
+</style>
 <style>
   :root {
     --primary: #1a5c8a;
@@ -979,4 +990,4 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
 
 </body>
-</html>
+</html> 
