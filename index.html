@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>منصة سَنَد للتمكين المهني</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --primary: #1a5c8a;
+    --primary-dark: #0f3d5e;
+    --primary-light: #2a7ab8;
+    --accent: #27ae60;
+    --accent-light: #2ecc71;
+    --accent2: #f39c12;
+    --bg: #f4f8fb;
+    --white: #ffffff;
+    --text: #1a2332;
+    --text-light: #5a6a7a;
+    --border: #d0e4f0;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 24px rgba(26,92,138,0.10);
+    --shadow-lg: 0 8px 40px rgba(26,92,138,0.18);
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Tajawal', 'Cairo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+/* ===== NAVBAR ===== */
+nav {
+position: fixed; top: 0; right: 0; left: 0; z-index: 1000;
+background: rgba(255,255,255,0.97);
+backdrop-filter: blur(12px);
+border-bottom: 1px solid var(–border);
+box-shadow: 0 2px 16px rgba(26,92,138,0.08);
+display: flex; align-items: center; justify-content: space-between;
+padding: 0 40px; height: 68px;
+}
+.nav-logo {
+font-family: ‘Cairo’, sans-serif;
+font-weight: 900; font-size: 1.7rem;
+color: var(–primary);
+letter-spacing: -1px;
+text-decoration: none;
+}
+.nav-logo span { color: var(–accent); }
+.nav-links { display: flex; gap: 8px; list-style: none; }
+.nav-links a {
+text-decoration: none; color: var(–text);
+font-weight: 500; font-size: 0.95rem;
+padding: 7px 16px; border-radius: 8px;
+transition: all 0.2s;
+}
+.nav-links a:hover { background: var(–primary); color: #fff; }
+.nav-badge {
+background: linear-gradient(135deg, var(–accent), var(–accent-light));
+color: #fff; font-size: 0.75rem; padding: 3px 10px;
+border-radius: 20px; font-weight: 700;
+}
+
+/* ===== HERO ===== */
+#home {
+min-height: 100vh;
+background: linear-gradient(135deg, var(–primary-dark) 0%, var(–primary) 50%, var(–primary-light) 100%);
+display: flex; align-items: center; justify-content: center;
+text-align: center; padding: 100px 20px 60px;
+position: relative; overflow: hidden;
+}
+#home::before {
+content: ‘’;
+position: absolute; inset: 0;
+background: url(“data:image/svg+xml,%3Csvg width=‘60’ height=‘60’ viewBox=‘0 0 60 60’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cg fill=‘none’ fill-rule=‘evenodd’%3E%3Cg fill=’%23ffffff’ fill-opacity=‘0.04’%3E%3Ccircle cx=‘30’ cy=‘30’ r=‘2’/%3E%3C/g%3E%3C/g%3E%3C/svg%3E”);
+}
+.hero-content { position: relative; max-width: 780px; }
+.hero-tag {
+display: inline-block;
+background: rgba(255,255,255,0.15);
+color: #fff; font-size: 0.85rem;
+padding: 6px 18px; border-radius: 20px;
+margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.25);
+backdrop-filter: blur(6px);
+}
+.hero-title {
+font-family: ‘Cairo’, sans-serif;
+font-size: clamp(2.2rem, 5vw, 3.5rem);
+font-weight: 900; color: #fff;
+line-height: 1.25; margin-bottom: 20px;
+}
+.hero-title span { color: #7ee8b5; }
+.hero-subtitle {
+font-size: 1.15rem; color: rgba(255,255,255,0.82);
+max-width: 560px; margin: 0 auto 36px;
+}
+.hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn {
+display: inline-flex; align-items: center; gap: 8px;
+padding: 14px 30px; border-radius: 12px;
+font-family: ‘Cairo’, sans-serif; font-weight: 700;
+font-size: 1rem; text-decoration: none; cursor: pointer;
+border: none; transition: all 0.25s;
+}
+.btn-white { background: #fff; color: var(–primary); }
+.btn-white:hover { background: var(–bg); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+.btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.5); }
+.btn-outline:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+.btn-primary { background: var(–primary); color: #fff; }
+.btn-primary:hover { background: var(–primary-dark); transform: translateY(-2px); box-shadow: var(–shadow); }
+.btn-accent { background: var(–accent); color: #fff; }
+.btn-accent:hover { background: #1e9150; transform: translateY(-2px); box-shadow: var(–shadow); }
+
+.hero-stats {
+display: flex; gap: 40px; justify-content: center;
+margin-top: 50px; padding-top: 40px;
+border-top: 1px solid rgba(255,255,255,0.15);
+flex-wrap: wrap;
+}
+.stat { text-align: center; }
+.stat-num { font-family: ‘Cairo’, sans-serif; font-size: 2rem; font-weight: 900; color: #7ee8b5; }
+.stat-label { font-size: 0.85rem; color: rgba(255,255,255,0.7); }
+
+/* ===== SECTIONS ===== */
+section { padding: 80px 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.section-header { text-align: center; margin-bottom: 50px; }
+.section-tag {
+display: inline-block;
+background: rgba(26,92,138,0.08); color: var(–primary);
+font-size: 0.8rem; font-weight: 700;
+padding: 5px 16px; border-radius: 20px;
+margin-bottom: 14px; letter-spacing: 0.5px;
+text-transform: uppercase;
+}
+.section-title {
+font-family: ‘Cairo’, sans-serif;
+font-size: clamp(1.6rem, 3vw, 2.2rem);
+font-weight: 900; color: var(–text);
+margin-bottom: 12px;
+}
+.section-desc { color: var(–text-light); max-width: 560px; margin: 0 auto; font-size: 1.05rem; }
+
+/* ===== ABOUT ===== */
+#about { background: #fff; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+.about-text h2 {
+font-family: ‘Cairo’, sans-serif; font-size: 1.9rem; font-weight: 900;
+color: var(–text); margin-bottom: 18px;
+}
+.about-text p { color: var(–text-light); font-size: 1.05rem; margin-bottom: 16px; line-height: 1.8; }
+.about-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.pill {
+background: rgba(26,92,138,0.08); color: var(–primary);
+padding: 6px 16px; border-radius: 20px; font-size: 0.88rem; font-weight: 600;
+}
+.about-visual {
+background: linear-gradient(135deg, var(–primary) 0%, var(–primary-light) 100%);
+border-radius: 24px; padding: 40px; color: #fff;
+display: flex; flex-direction: column; gap: 20px;
+}
+.about-stat-card { background: rgba(255,255,255,0.15); border-radius: 14px; padding: 20px; text-align: center; }
+.about-stat-card .num { font-family: ‘Cairo’, sans-serif; font-size: 2.4rem; font-weight: 900; color: #7ee8b5; }
+.about-stat-card .lbl { font-size: 0.9rem; color: rgba(255,255,255,0.8); }
+
+/* ===== PORTALS ===== */
+#portals { background: var(–bg); }
+.portals-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+.portal-card {
+background: var(–card-bg); border-radius: var(–radius);
+box-shadow: var(–shadow); overflow: hidden;
+border: 1px solid var(–border); transition: transform 0.25s, box-shadow 0.25s;
+}
+.portal-card:hover { transform: translateY(-4px); box-shadow: var(–shadow-lg); }
+.portal-header {
+padding: 28px 30px 20px;
+display: flex; align-items: center; gap: 16px;
+}
+.portal-icon {
+width: 56px; height: 56px; border-radius: 14px;
+display: flex; align-items: center; justify-content: center;
+font-size: 1.6rem;
+}
+.icon-blue { background: rgba(26,92,138,0.1); }
+.icon-green { background: rgba(39,174,96,0.1); }
+.portal-title { font-family: ‘Cairo’, sans-serif; font-size: 1.25rem; font-weight: 800; color: var(–text); }
+.portal-subtitle { color: var(–text-light); font-size: 0.9rem; }
+.portal-body { padding: 0 30px 28px; }
+.toggle-btn {
+width: 100%; padding: 12px; border-radius: 10px; border: 2px solid var(–border);
+background: transparent; color: var(–primary); font-family: ‘Cairo’, sans-serif;
+font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: all 0.2s;
+display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.toggle-btn:hover { background: var(–primary); color: #fff; border-color: var(–primary); }
+.form-panel {
+display: none; margin-top: 20px; flex-direction: column; gap: 12px;
+}
+.form-panel.open { display: flex; }
+.form-input {
+width: 100%; padding: 11px 14px; border: 1.5px solid var(–border);
+border-radius: var(–radius-sm); font-family: ‘Tajawal’, sans-serif;
+font-size: 0.95rem; color: var(–text); background: var(–bg);
+transition: border-color 0.2s; outline: none;
+}
+.form-input:focus { border-color: var(–primary); }
+.submit-btn {
+padding: 12px; border-radius: 10px; border: none;
+background: var(–primary); color: #fff;
+font-family: ‘Cairo’, sans-serif; font-weight: 700;
+font-size: 1rem; cursor: pointer; transition: background 0.2s;
+}
+.submit-btn:hover { background: var(–primary-dark); }
+
+/* ===== DSS ===== */
+#dss-tool { background: #fff; }
+.dss-card {
+background: linear-gradient(135deg, var(–primary-dark) 0%, var(–primary) 100%);
+border-radius: 24px; padding: 50px; color: #fff; max-width: 720px; margin: 0 auto;
+box-shadow: var(–shadow-lg);
+}
+.dss-card h3 { font-family: ‘Cairo’, sans-serif; font-size: 1.4rem; font-weight: 900; margin-bottom: 8px; }
+.dss-card p { color: rgba(255,255,255,0.75); margin-bottom: 30px; }
+.dss-row { display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
+.dss-select {
+flex: 1; min-width: 200px; padding: 12px 16px;
+border-radius: 10px; border: 1.5px solid rgba(255,255,255,0.2);
+background: rgba(255,255,255,0.1); color: #fff;
+font-family: ‘Tajawal’, sans-serif; font-size: 0.95rem; outline: none;
+}
+.dss-select option { color: var(–text); background: #fff; }
+.dss-analyze {
+width: 100%; padding: 14px; border-radius: 12px; border: none;
+background: var(–accent); color: #fff;
+font-family: ‘Cairo’, sans-serif; font-weight: 700;
+font-size: 1rem; cursor: pointer; transition: background 0.2s;
+margin-top: 6px;
+}
+.dss-analyze:hover { background: #1e9150; }
+.dss-result {
+margin-top: 24px; background: rgba(255,255,255,0.12);
+border-radius: 14px; padding: 22px;
+border: 1px solid rgba(255,255,255,0.2);
+display: none;
+}
+.dss-result.show { display: block; }
+.dss-result h4 { font-family: ‘Cairo’, sans-serif; font-weight: 800; margin-bottom: 10px; font-size: 1.05rem; }
+.dss-result p { color: rgba(255,255,255,0.85); font-size: 0.95rem; line-height: 1.7; }
+.dss-apply {
+margin-top: 14px; display: inline-block;
+background: #fff; color: var(–primary);
+padding: 10px 24px; border-radius: 9px;
+font-family: ‘Cairo’, sans-serif; font-weight: 700;
+text-decoration: none; font-size: 0.95rem;
+transition: all 0.2s; cursor: pointer; border: none;
+}
+.dss-apply:hover { background: var(–bg); }
+
+/* ===== FUTURE FEATURES (Recommendations) ===== */
+#features { background: var(–bg); }
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.feature-card {
+background: var(–card-bg); border-radius: var(–radius);
+padding: 28px 24px; box-shadow: var(–shadow);
+border: 1px solid var(–border);
+transition: transform 0.25s, box-shadow 0.25s;
+position: relative; overflow: hidden;
+}
+.feature-card:hover { transform: translateY(-4px); box-shadow: var(–shadow-lg); }
+.feature-card::before {
+content: ‘’; position: absolute; top: 0; right: 0;
+width: 4px; height: 100%;
+background: linear-gradient(180deg, var(–primary), var(–accent));
+border-radius: 0 var(–radius) var(–radius) 0;
+}
+.feature-badge {
+display: inline-block; font-size: 0.72rem; font-weight: 700;
+padding: 3px 10px; border-radius: 20px; margin-bottom: 14px;
+}
+.badge-soon { background: rgba(243,156,18,0.12); color: var(–accent2); }
+.badge-planned { background: rgba(26,92,138,0.10); color: var(–primary); }
+.feature-icon { font-size: 2rem; margin-bottom: 14px; display: block; }
+.feature-title {
+font-family: ‘Cairo’, sans-serif; font-weight: 800;
+font-size: 1.05rem; color: var(–text); margin-bottom: 10px;
+}
+.feature-desc { color: var(–text-light); font-size: 0.92rem; line-height: 1.7; }
+
+/* ===== AI SECTION ===== */
+#ai-section { background: #fff; }
+.ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+.ai-text h2 {
+font-family: ‘Cairo’, sans-serif; font-size: 1.8rem; font-weight: 900;
+color: var(–text); margin-bottom: 16px;
+}
+.ai-text p { color: var(–text-light); font-size: 1rem; line-height: 1.8; margin-bottom: 14px; }
+.ai-features { display: flex; flex-direction: column; gap: 14px; margin-top: 24px; }
+.ai-feature-item {
+display: flex; align-items: flex-start; gap: 14px;
+background: var(–bg); border-radius: 12px; padding: 16px;
+border: 1px solid var(–border);
+}
+.ai-feature-icon {
+width: 40px; height: 40px; border-radius: 10px;
+background: rgba(26,92,138,0.1); display: flex;
+align-items: center; justify-content: center; font-size: 1.2rem;
+flex-shrink: 0;
+}
+.ai-feature-text h4 { font-family: ‘Cairo’, sans-serif; font-weight: 700; font-size: 0.95rem; color: var(–text); margin-bottom: 4px; }
+.ai-feature-text p { font-size: 0.87rem; color: var(–text-light); margin: 0; }
+
+.ai-visual {
+background: linear-gradient(135deg, #0f3d5e 0%, var(–primary) 100%);
+border-radius: 24px; padding: 36px; color: #fff;
+}
+.ai-visual h3 { font-family: ‘Cairo’, sans-serif; font-weight: 800; margin-bottom: 20px; font-size: 1.1rem; }
+.ai-bar { margin-bottom: 18px; }
+.ai-bar-label { display: flex; justify-content: space-between; font-size: 0.88rem; color: rgba(255,255,255,0.8); margin-bottom: 6px; }
+.ai-bar-track { background: rgba(255,255,255,0.15); border-radius: 100px; height: 10px; overflow: hidden; }
+.ai-bar-fill { height: 100%; border-radius: 100px; background: linear-gradient(90deg, var(–accent-light), #7ee8b5); }
+
+/* ===== API INTEGRATION ===== */
+#integration { background: var(–bg); }
+.integration-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.integration-card {
+background: #fff; border-radius: var(–radius); padding: 28px 22px;
+text-align: center; box-shadow: var(–shadow); border: 1px solid var(–border);
+transition: transform 0.25s;
+}
+.integration-card:hover { transform: translateY(-4px); }
+.integration-logo {
+width: 64px; height: 64px; margin: 0 auto 16px;
+border-radius: 16px; display: flex; align-items: center; justify-content: center;
+font-size: 2rem;
+}
+.bg-blue { background: rgba(26,92,138,0.08); }
+.bg-green { background: rgba(39,174,96,0.08); }
+.bg-orange { background: rgba(243,156,18,0.08); }
+.integration-card h4 { font-family: ‘Cairo’, sans-serif; font-weight: 800; font-size: 1rem; margin-bottom: 8px; }
+.integration-card p { color: var(–text-light); font-size: 0.88rem; line-height: 1.6; }
+.integration-status {
+display: inline-block; margin-top: 14px;
+font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 20px;
+}
+.status-active { background: rgba(39,174,96,0.1); color: var(–accent); }
+.status-soon { background: rgba(243,156,18,0.1); color: var(–accent2); }
+
+/* ===== VOICE ===== */
+#voice { background: #fff; }
+.voice-card {
+background: linear-gradient(135deg, var(–primary-dark), var(–primary));
+border-radius: 24px; padding: 50px; text-align: center; color: #fff;
+max-width: 640px; margin: 0 auto;
+box-shadow: var(–shadow-lg);
+}
+.voice-circle {
+width: 100px; height: 100px; border-radius: 50%;
+background: rgba(255,255,255,0.15);
+display: flex; align-items: center; justify-content: center;
+font-size: 2.5rem; margin: 0 auto 24px;
+cursor: pointer; transition: all 0.3s;
+border: 2px solid rgba(255,255,255,0.3);
+position: relative;
+}
+.voice-circle.listening {
+background: rgba(39,174,96,0.3);
+border-color: var(–accent-light);
+animation: pulse 1.4s infinite;
+}
+@keyframes pulse {
+0% { box-shadow: 0 0 0 0 rgba(46,204,113,0.5); }
+70% { box-shadow: 0 0 0 20px rgba(46,204,113,0); }
+100% { box-shadow: 0 0 0 0 rgba(46,204,113,0); }
+}
+.voice-card h3 { font-family: ‘Cairo’, sans-serif; font-size: 1.5rem; font-weight: 900; margin-bottom: 12px; }
+.voice-card p { color: rgba(255,255,255,0.75); margin-bottom: 28px; line-height: 1.7; }
+.voice-status { font-size: 0.95rem; color: rgba(255,255,255,0.7); margin-top: 16px; min-height: 24px; }
+
+/* ===== STATS ===== */
+#stats-section { background: var(–primary); }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; text-align: center; }
+.stat-item .num {
+font-family: ‘Cairo’, sans-serif; font-size: 2.8rem; font-weight: 900;
+color: #7ee8b5; margin-bottom: 8px;
+}
+.stat-item .lbl { color: rgba(255,255,255,0.8); font-size: 0.95rem; }
+
+/* ===== CONTACT ===== */
+#contact { background: var(–bg); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+.contact-info h2 {
+font-family: ‘Cairo’, sans-serif; font-size: 1.8rem; font-weight: 900;
+color: var(–text); margin-bottom: 16px;
+}
+.contact-info p { color: var(–text-light); font-size: 1rem; line-height: 1.8; margin-bottom: 24px; }
+.contact-items { display: flex; flex-direction: column; gap: 14px; }
+.contact-item {
+display: flex; align-items: center; gap: 14px;
+background: #fff; border-radius: 12px; padding: 14px 18px;
+border: 1px solid var(–border);
+}
+.contact-item-icon { font-size: 1.4rem; }
+.contact-item-text { font-size: 0.95rem; color: var(–text-light); }
+.contact-form {
+background: #fff; border-radius: var(–radius);
+padding: 36px; box-shadow: var(–shadow); border: 1px solid var(–border);
+display: flex; flex-direction: column; gap: 14px;
+}
+.contact-form h3 { font-family: ‘Cairo’, sans-serif; font-weight: 800; font-size: 1.2rem; margin-bottom: 6px; }
+
+/* ===== FOOTER ===== */
+footer {
+background: var(–primary-dark); color: rgba(255,255,255,0.8);
+text-align: center; padding: 28px 20px;
+font-size: 0.9rem;
+}
+footer span { color: #7ee8b5; font-weight: 700; }
+
+/* ===== CHATBOT ===== */
+.chatbot-btn {
+position: fixed; bottom: 28px; left: 28px; z-index: 999;
+width: 60px; height: 60px; border-radius: 50%;
+background: linear-gradient(135deg, var(–primary), var(–primary-light));
+color: #fff; font-size: 1.6rem;
+display: flex; align-items: center; justify-content: center;
+cursor: pointer; box-shadow: 0 4px 20px rgba(26,92,138,0.4);
+border: none; transition: transform 0.2s;
+}
+.chatbot-btn:hover { transform: scale(1.08); }
+.chatbot-window {
+position: fixed; bottom: 100px; left: 28px; z-index: 998;
+width: 340px; background: #fff; border-radius: 20px;
+box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+display: none; flex-direction: column;
+overflow: hidden; border: 1px solid var(–border);
+}
+.chatbot-window.open { display: flex; }
+.chatbot-header {
+background: linear-gradient(90deg, var(–primary-dark), var(–primary));
+color: #fff; padding: 16px 20px;
+display: flex; align-items: center; gap: 12px;
+}
+.chatbot-header .dot { width: 10px; height: 10px; border-radius: 50%; background: var(–accent-light); }
+.chatbot-header h4 { font-family: ‘Cairo’, sans-serif; font-weight: 800; font-size: 1rem; }
+.chatbot-header span { font-size: 0.8rem; opacity: 0.75; }
+.chatbot-messages { padding: 16px; flex: 1; max-height: 280px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+.msg { max-width: 80%; padding: 10px 14px; border-radius: 14px; font-size: 0.9rem; line-height: 1.5; }
+.msg-bot { background: var(–bg); color: var(–text); border-bottom-right-radius: 4px; align-self: flex-start; }
+.msg-user { background: var(–primary); color: #fff; border-bottom-left-radius: 4px; align-self: flex-end; }
+.chatbot-input { display: flex; border-top: 1px solid var(–border); padding: 12px; gap: 8px; }
+.chatbot-input input {
+flex: 1; padding: 9px 12px; border: 1.5px solid var(–border);
+border-radius: 9px; font-family: ‘Tajawal’, sans-serif; font-size: 0.9rem; outline: none;
+}
+.chatbot-input input:focus { border-color: var(–primary); }
+.chatbot-send {
+padding: 9px 16px; background: var(–primary); color: #fff;
+border: none; border-radius: 9px; cursor: pointer; font-size: 1rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+nav { padding: 0 20px; }
+.nav-links { display: none; }
+.about-grid, .portals-grid, .ai-grid, .contact-grid { grid-template-columns: 1fr; }
+.features-grid, .integration-grid { grid-template-columns: 1fr 1fr; }
+.stats-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 580px) {
+.features-grid, .integration-grid { grid-template-columns: 1fr; }
+.stats-grid { grid-template-columns: 1fr 1fr; }
+.dss-card { padding: 28px 20px; }
+.voice-card { padding: 32px 20px; }
+}
+
+/* ===== ANIMATIONS ===== */
+.fade-up {
+opacity: 0; transform: translateY(30px);
+transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.fade-up.visible { opacity: 1; transform: none; }
+</style>
+
+</head>
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+  <a href="#home" class="nav-logo">سَ<span>نَ</span>د</a>
+  <ul class="nav-links">
+    <li><a href="#home">الرئيسية</a></li>
+    <li><a href="#about">من نحن</a></li>
+    <li><a href="#portals">البوابات</a></li>
+    <li><a href="#dss-tool">المواءمة</a></li>
+    <li><a href="#features">التطوير <span class="nav-badge">جديد</span></a></li>
+    <li><a href="#ai-section">الذكاء الاصطناعي</a></li>
+    <li><a href="#integration">التكامل</a></li>
+    <li><a href="#contact">تواصل معنا</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+
+<section id="home">
+  <div class="hero-content fade-up">
+    <div class="hero-tag">🇸🇦 رؤية المملكة 2030 — التمكين المهني لذوي الإعاقة</div>
+    <h1 class="hero-title">منصة <span>سَنَد</span><br/>للتمكين المهني</h1>
+    <p class="hero-subtitle">تكامل ذكي بين نظم دعم القرار والمسؤولية الاجتماعية — نحو مستقبل مهني أكثر شمولاً وعدالة.</p>
+    <div class="hero-btns">
+      <a href="#portals" class="btn btn-white">🚀 ابدأ الآن</a>
+      <a href="#dss-tool" class="btn btn-outline">🔍 محرك المواءمة</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">+500</div><div class="stat-label">مستفيد مسجّل</div></div>
+      <div class="stat"><div class="stat-num">+120</div><div class="stat-label">جهة توظيف</div></div>
+      <div class="stat"><div class="stat-num">٪87</div><div class="stat-label">نسبة الرضا</div></div>
+      <div class="stat"><div class="stat-num">+45</div><div class="stat-label">وظيفة موصى بها</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+
+<section id="about">
+  <div class="container">
+    <div class="about-grid fade-up">
+      <div class="about-text">
+        <h2>من نحن؟</h2>
+        <p>نحن منصة وطنية تهدف لتمكين ذوي الإعاقة مهنياً عبر تقنيات دعم القرار، لضمان مواءمة دقيقة بين مهارات الفرد ومتطلبات بيئة العمل وفق رؤية المملكة 2030.</p>
+        <p>نؤمن بأن لكل فرد طاقة وقدرة فريدة، وأن الفرصة المناسبة يمكن أن تُحدث فارقاً حقيقياً في حياته ومجتمعه.</p>
+        <div class="about-pills">
+          <span class="pill">🤝 شمول حقيقي</span>
+          <span class="pill">🧠 ذكاء اصطناعي</span>
+          <span class="pill">🎯 مواءمة دقيقة</span>
+          <span class="pill">🔗 تكامل وطني</span>
+          <span class="pill">📱 إمكانية وصول</span>
+        </div>
+      </div>
+      <div class="about-visual">
+        <div class="about-stat-card">
+          <div class="num">٪94</div>
+          <div class="lbl">دقة محرك المواءمة الذكي</div>
+        </div>
+        <div class="about-stat-card">
+          <div class="num">3 ثوانٍ</div>
+          <div class="lbl">متوسط وقت الحصول على التوصية</div>
+        </div>
+        <div class="about-stat-card">
+          <div class="num">متاح 24/7</div>
+          <div class="lbl">المساعد الذكي والمواءمة</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTALS -->
+
+<section id="portals">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-tag">بوابات المنصة</div>
+      <h2 class="section-title">اختر بوابتك</h2>
+      <p class="section-desc">سواء كنت باحثاً عن عمل أو صاحب عمل، نحن هنا لمساعدتك.</p>
+    </div>
+    <div class="portals-grid fade-up">
+      <!-- Job Seeker -->
+      <div class="portal-card">
+        <div class="portal-header">
+          <div class="portal-icon icon-blue">👤</div>
+          <div>
+            <div class="portal-title">الباحثون عن عمل</div>
+            <div class="portal-subtitle">أصحاب الهمم والكفاءات</div>
+          </div>
+        </div>
+        <div class="portal-body">
+          <button class="toggle-btn" onclick="toggleForm('seeker-form', this)">📋 فتح نموذج التقديم</button>
+          <div class="form-panel" id="seeker-form">
+            <input class="form-input" type="text" placeholder="الاسم الأول (مطلوب)"/>
+            <input class="form-input" type="text" placeholder="اسم العائلة (مطلوب)"/>
+            <input class="form-input" type="tel" placeholder="رقم الهاتف (مطلوب)"/>
+            <input class="form-input" type="email" placeholder="البريد الإلكتروني (مطلوب)"/>
+            <input class="form-input" type="text" placeholder="العنوان (مطلوب)"/>
+            <input class="form-input" type="file" accept=".pdf,.doc,.docx" style="padding:8px"/>
+            <textarea class="form-input" rows="3" placeholder="تفاصيل إضافية..."></textarea>
+            <button class="submit-btn">إرسال التقديم ✅</button>
+          </div>
+        </div>
+      </div>
+      <!-- Employer -->
+      <div class="portal-card">
+        <div class="portal-header">
+          <div class="portal-icon icon-green">🏢</div>
+          <div>
+            <div class="portal-title">أصحاب العمل</div>
+            <div class="portal-subtitle">المؤسسات والشركات الداعمة</div>
+          </div>
+        </div>
+        <div class="portal-body">
+          <button class="toggle-btn" onclick="toggleForm('employer-form', this)" style="border-color:var(--accent); color:var(--accent);">📋 تسجيل المؤسسة</button>
+          <div class="form-panel" id="employer-form">
+            <input class="form-input" type="text" placeholder="اسم الشركة (مطلوب)"/>
+            <input class="form-input" type="tel" placeholder="رقم الهاتف (مطلوب)"/>
+            <input class="form-input" type="email" placeholder="البريد الإلكتروني (مطلوب)"/>
+            <textarea class="form-input" rows="3" placeholder="تفاصيل المؤسسة والفرص المتاحة..."></textarea>
+            <button class="submit-btn" style="background:var(--accent)">تسجيل الشركة ✅</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DSS TOOL -->
+
+<section id="dss-tool">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-tag">محرك المواءمة</div>
+      <h2 class="section-title">محرك المواءمة الذكي (DSS)</h2>
+      <p class="section-desc">اتخذ قرارك المهني بناءً على بيانات دقيقة وتوصية ذكية مخصصة لك.</p>
+    </div>
+    <div class="dss-card fade-up">
+      <h3>🎯 تحليل المواءمة المهنية</h3>
+      <p>أدخل بياناتك وسيقوم المحرك بتحليل أفضل الفرص المناسبة لك</p>
+      <div class="dss-row">
+        <select class="dss-select" id="dss-challenge">
+          <option value="">نوع التحدي</option>
+          <option value="حركية">حركية</option>
+          <option value="بصرية">بصرية</option>
+          <option value="سمعية">سمعية</option>
+          <option value="ذهنية">ذهنية</option>
+        </select>
+        <select class="dss-select" id="dss-field">
+          <option value="">المجال المهني</option>
+          <option value="البرمجة والبيانات">البرمجة والبيانات</option>
+          <option value="الإدارة المكتبية">الإدارة المكتبية</option>
+          <option value="التصميم الجرافيكي">التصميم الجرافيكي</option>
+          <option value="خدمة العملاء">خدمة العملاء (عن بُعد)</option>
+          <option value="الترجمة">الترجمة واللغات</option>
+        </select>
+      </div>
+      <button class="dss-analyze" onclick="analyzeDSS()">🔍 تحليل وإصدار التوصية</button>
+      <div class="dss-result" id="dss-result">
+        <h4>📊 توصية سَنَد لاتخاذ القرار</h4>
+        <p id="dss-text"></p>
+        <button class="dss-apply" onclick="document.getElementById('seeker-form').classList.add('open'); document.getElementById('portals').scrollIntoView()">التقديم على هذه الوظيفة ←</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUTURE FEATURES / RECOMMENDATIONS -->
+
+<section id="features">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-tag">التوصيات المقترحة</div>
+      <h2 class="section-title">التوصيات المقدمة لتطوير النظام</h2>
+      <p class="section-desc">خارطة طريق واضحة لرفع كفاءة المنصة وتوسيع تأثيرها.</p>
+    </div>
+    <div class="features-grid fade-up">
+      <div class="feature-card">
+        <span class="feature-badge badge-planned">قيد التطوير</span>
+        <span class="feature-icon">🤖</span>
+        <div class="feature-title">الذكاء الاصطناعي التنبؤي (AI)</div>
+        <p class="feature-desc">تطوير خوارزميات محرك المواءمة لتصبح "تنبؤية"، بحيث يتم توقع نسب النجاح الوظيفي بناءً على تحليل الأنماط والبيانات الضخمة (Big Data) لقصص النجاح السابقة.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-badge badge-soon">قريباً</span>
+        <span class="feature-icon">🥽</span>
+        <div class="feature-title">الواقع المعزز (AR)</div>
+        <p class="feature-desc">دمج ميزة المسح البصري لمقار العمل، مما يتيح لأصحاب العمل محاكاة التعديلات الهندسية (مثل المنحدرات والمكاتب) بشكل افتراضي ودقيق قبل التنفيذ الفعلي.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-badge badge-soon">قريباً</span>
+        <span class="feature-icon">📱</span>
+        <div class="feature-title">تطبيق Native App + GPS</div>
+        <p class="feature-desc">إطلاق تطبيق مستقل يدعم ميزات التنبيهات اللحظية والارتباط بالموقع الجغرافي لتوجيه المستفيدين نحو أقرب الفرص الوظيفية والبيئات المهيأة جغرافياً.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-badge badge-planned">مخطط له</span>
+        <span class="feature-icon">🔗</span>
+        <div class="feature-title">الربط التقني المتكامل (API)</div>
+        <p class="feature-desc">تفعيل الربط البرمجي مع المنصات الوطنية (مثل قوى وجدارات) لتبادل البيانات وتحقيق التحقق الآلي من السجلات المهنية والطبية للمستفيدين.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-badge badge-planned">مخطط له</span>
+        <span class="feature-icon">🎙️</span>
+        <div class="feature-title">واجهة التحكم الصوتي (Voice Bot)</div>
+        <p class="feature-desc">تحويل المساعد الذكي إلى Voice Bot متكامل يدعم الأوامر الصوتية، لتمكين ذوي الإعاقة البصرية والحركية الشديدة من تصفح المنصة وإنجاز المعاملات دون الحاجة للكتابة اليدوية.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-badge badge-soon">مقترح إضافي</span>
+        <span class="feature-icon">🏆</span>
+        <div class="feature-title">نظام الإنجازات والشارات</div>
+        <p class="feature-desc">نظام تحفيزي يمنح المستفيدين شارات وإنجازات عند إكمال ملفهم أو الحصول على توصيات أو اجتياز تدريبات، مما يرفع الدافعية والتفاعل مع المنصة.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI SECTION -->
+
+<section id="ai-section">
+  <div class="container">
+    <div class="ai-grid fade-up">
+      <div class="ai-text">
+        <div class="section-tag">الذكاء الاصطناعي</div>
+        <h2>توظيف الذكاء الاصطناعي التنبؤي</h2>
+        <p>يعتمد محرك المواءمة على خوارزميات متطورة تتعلم من بيانات قصص النجاح السابقة لتقديم توصيات أكثر دقة وملاءمة لكل مستفيد.</p>
+        <div class="ai-features">
+          <div class="ai-feature-item">
+            <div class="ai-feature-icon">📊</div>
+            <div class="ai-feature-text">
+              <h4>تحليل البيانات الضخمة</h4>
+              <p>معالجة آلاف حالات التوظيف السابقة لاكتشاف الأنماط الناجحة</p>
+            </div>
+          </div>
+          <div class="ai-feature-item">
+            <div class="ai-feature-icon">🎯</div>
+            <div class="ai-feature-text">
+              <h4>توقع نسبة النجاح</h4>
+              <p>إصدار نسبة توقعية لنجاح المستفيد في كل وظيفة مقترحة</p>
+            </div>
+          </div>
+          <div class="ai-feature-item">
+            <div class="ai-feature-icon">🔄</div>
+            <div class="ai-feature-text">
+              <h4>تعلم مستمر</h4>
+              <p>النظام يتحسن باستمرار مع كل حالة جديدة يعالجها</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ai-visual">
+        <h3>📈 مؤشرات الأداء التنبؤي</h3>
+        <div class="ai-bar">
+          <div class="ai-bar-label"><span>برمجة + إعاقة حركية</span><span>٪94</span></div>
+          <div class="ai-bar-track"><div class="ai-bar-fill" style="width:94%"></div></div>
+        </div>
+        <div class="ai-bar">
+          <div class="ai-bar-label"><span>إدارة + إعاقة سمعية</span><span>٪88</span></div>
+          <div class="ai-bar-track"><div class="ai-bar-fill" style="width:88%"></div></div>
+        </div>
+        <div class="ai-bar">
+          <div class="ai-bar-label"><span>تصميم + إعاقة بصرية</span><span>٪76</span></div>
+          <div class="ai-bar-track"><div class="ai-bar-fill" style="width:76%"></div></div>
+        </div>
+        <div class="ai-bar">
+          <div class="ai-bar-label"><span>ترجمة + إعاقة حركية</span><span>٪91</span></div>
+          <div class="ai-bar-track"><div class="ai-bar-fill" style="width:91%"></div></div>
+        </div>
+        <div style="margin-top:20px; background:rgba(255,255,255,0.1); border-radius:10px; padding:14px; font-size:0.85rem; color:rgba(255,255,255,0.75);">
+          🔬 البيانات مستخلصة من تحليل +500 حالة توظيف ناجحة عبر المنصة
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTEGRATION -->
+
+<section id="integration">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-tag">الربط التقني</div>
+      <h2 class="section-title">التكامل مع المنصات الوطنية</h2>
+      <p class="section-desc">ربط برمجي متكامل مع الجهات الحكومية لضمان التحقق الآلي والموثوقية.</p>
+    </div>
+    <div class="integration-grid fade-up">
+      <div class="integration-card">
+        <div class="integration-logo bg-blue">🏛️</div>
+        <h4>منصة قوى</h4>
+        <p>ربط آلي مع سجلات العمل والتحقق من المؤهلات والخبرات المهنية.</p>
+        <span class="integration-status status-soon">🔄 قيد التطوير</span>
+      </div>
+      <div class="integration-card">
+        <div class="integration-logo bg-green">🎓</div>
+        <h4>منصة جدارات</h4>
+        <p>الاطلاع على الشهادات والكفاءات المعتمدة لإكمال ملف المستفيد تلقائياً.</p>
+        <span class="integration-status status-soon">🔄 قيد التطوير</span>
+      </div>
+      <div class="integration-card">
+        <div class="integration-logo bg-orange">🏥</div>
+        <h4>السجلات الصحية</h4>
+        <p>التحقق الآلي من التقارير الطبية المعتمدة لتحديد المواءمة البيئية الأنسب.</p>
+        <span class="integration-status status-active">✅ متاح تجريبياً</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOICE BOT -->
+
+<section id="voice">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-tag">إمكانية الوصول</div>
+      <h2 class="section-title">واجهة التحكم الصوتي</h2>
+      <p class="section-desc">تمكين ذوي الإعاقة البصرية والحركية من استخدام المنصة بالكامل صوتياً.</p>
+    </div>
+    <div class="voice-card fade-up">
+      <div class="voice-circle" id="voiceBtn" onclick="toggleVoice()">🎙️</div>
+      <h3>مساعد سَنَد الصوتي</h3>
+      <p>انقر على الزر وتحدث بأمرك — المساعد الذكي يستمع ويستجيب بالعربية بشكل كامل، مما يتيح لك التنقل والتقديم والاستفسار دون لمس لوحة المفاتيح.</p>
+      <div class="voice-status" id="voice-status">انقر للبدء في التحدث...</div>
+      <div style="margin-top:20px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+        <span style="background:rgba(255,255,255,0.12); padding:8px 16px; border-radius:20px; font-size:0.85rem;">🗣️ "اعرض الوظائف"</span>
+        <span style="background:rgba(255,255,255,0.12); padding:8px 16px; border-radius:20px; font-size:0.85rem;">🗣️ "قدّم لي الآن"</span>
+        <span style="background:rgba(255,255,255,0.12); padding:8px 16px; border-radius:20px; font-size:0.85rem;">🗣️ "ما هي التوصية؟"</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+
+<section id="stats-section">
+  <div class="container">
+    <div class="stats-grid fade-up">
+      <div class="stat-item"><div class="num">+500</div><div class="lbl">مستفيد مسجّل</div></div>
+      <div class="stat-item"><div class="num">+120</div><div class="lbl">جهة توظيف شريكة</div></div>
+      <div class="stat-item"><div class="num">٪94</div><div class="lbl">دقة المواءمة الذكية</div></div>
+      <div class="stat-item"><div class="num">+45</div><div class="lbl">وظيفة موصى بها</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid fade-up">
+      <div class="contact-info">
+        <div class="section-tag">تواصل معنا</div>
+        <h2>نحن هنا لمساعدتك</h2>
+        <p>هل لديك سؤال أو اقتراح أو ترغب في التعاون معنا؟ تواصل مع فريق سَنَد ونسعد بالرد عليك.</p>
+        <div class="contact-items">
+          <div class="contact-item"><span class="contact-item-icon">📧</span><span class="contact-item-text">support@sanad-platform.sa</span></div>
+          <div class="contact-item"><span class="contact-item-icon">📞</span><span class="contact-item-text">920-000-XXXX</span></div>
+          <div class="contact-item"><span class="contact-item-icon">📍</span><span class="contact-item-text">المملكة العربية السعودية</span></div>
+          <div class="contact-item"><span class="contact-item-icon">🕐</span><span class="contact-item-text">متاح 24/7 عبر المساعد الذكي</span></div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <h3>📩 أرسل رسالتك</h3>
+        <input class="form-input" type="text" placeholder="الاسم (مطلوب)"/>
+        <input class="form-input" type="email" placeholder="البريد الإلكتروني (مطلوب)"/>
+        <textarea class="form-input" rows="5" placeholder="رسالتك..."></textarea>
+        <button class="submit-btn">إرسال الرسالة ✉️</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+  <p>© <span>سَنَد</span> 2026 — منصة وطنية للتمكين المهني لذوي الإعاقة | رؤية المملكة 2030</p>
+  <p style="margin-top:8px; font-size:0.82rem; opacity:0.6;">نسخة مطورة تشمل التوصيات المقترحة للنظام</p>
+</footer>
+
+<!-- CHATBOT -->
+
+<button class="chatbot-btn" onclick="toggleChat()">💬</button>
+
+<div class="chatbot-window" id="chatbot">
+  <div class="chatbot-header">
+    <div class="dot"></div>
+    <div>
+      <h4>مساعد سَنَد الذكي</h4>
+      <span>متاح الآن • يرد فوراً</span>
+    </div>
+  </div>
+  <div class="chatbot-messages" id="chat-messages">
+    <div class="msg msg-bot">👋 مرحباً! أنا مساعد سَنَد. كيف يمكنني مساعدتك اليوم؟</div>
+    <div class="msg msg-bot">يمكنني مساعدتك في التقديم للوظائف أو الحصول على توصية مهنية مخصصة.</div>
+  </div>
+  <div class="chatbot-input">
+    <input type="text" id="chat-input" placeholder="اكتب رسالتك..." onkeypress="if(event.key==='Enter')sendMsg()"/>
+    <button class="chatbot-send" onclick="sendMsg()">➤</button>
+  </div>
+</div>
+
+<script>
+// Toggle form panels
+function toggleForm(id, btn) {
+  const panel = document.getElementById(id);
+  panel.classList.toggle('open');
+  btn.textContent = panel.classList.contains('open') ? '✖ إغلاق النموذج' : '📋 ' + (id === 'seeker-form' ? 'فتح نموذج التقديم' : 'تسجيل المؤسسة');
+}
+
+// DSS Analysis
+function analyzeDSS() {
+  const challenge = document.getElementById('dss-challenge').value;
+  const field = document.getElementById('dss-field').value;
+  if (!challenge || !field) {
+    alert('الرجاء اختيار نوع التحدي والمجال المهني');
+    return;
+  }
+  const recommendations = {
+    'حركية-البرمجة والبيانات': 'بناءً على تحليل بيانات +200 حالة مشابهة، يُوصى بشدة بمجال البرمجة والبيانات لأصحاب الإعاقة الحركية. نسبة النجاح المتوقعة: 94٪. بيئة العمل عن بُعد تمنحك مرونة كاملة. التخصصات الأنسب: تحليل البيانات، تطوير الويب.',
+    'حركية-الإدارة المكتبية': 'الإدارة المكتبية خيار ممتاز مع تهيئة بيئة مناسبة. نسبة النجاح: 82٪. يُنصح بالعمل عن بُعد أو المكاتب المهيأة. تحقق من برنامج تهيئة بيئة العمل المتاح في المنصة.',
+    'بصرية-البرمجة والبيانات': 'التقنيات المساعدة كقارئات الشاشة تجعل البرمجة متاحة تماماً. نسبة النجاح: 79٪. يُوصى باستخدام بيئات التطوير المتوافقة مع إمكانية الوصول.',
+    'بصرية-الإدارة المكتبية': 'مع أدوات إمكانية الوصول المناسبة، الإدارة المكتبية خيار جيد. نسبة النجاح: 71٪. نوصي بتدريب مسبق على برامج العمل.',
+    'سمعية-البرمجة والبيانات': 'مجال البرمجة مثالي لأصحاب الإعاقة السمعية حيث لا تتطلب معظم المهام تواصلاً صوتياً. نسبة النجاح: 96٪. أعلى نسبة توافق في قاعدة بياناتنا!',
+    'سمعية-الإدارة المكتبية': 'الإدارة المكتبية مناسبة مع توفر بدائل تواصل كتابي ومرئي. نسبة النجاح: 88٪. تأكد من توفر بيئة داعمة في جهة العمل.',
+  };
+  const key = `${challenge}-${field}`;
+  const text = recommendations[key] || `بناءً على تحليل بياناتك (${challenge} + ${field})، يوجد توافق معقول. نوصي بالتواصل مع فريق سَنَد للحصول على تقييم أكثر تفصيلاً ومتابعة الفرص المتاحة في قاعدة بياناتنا.`;
+  document.getElementById('dss-text').textContent = text;
+  document.getElementById('dss-result').classList.add('show');
+}
+
+// Voice Bot
+let isListening = false;
+function toggleVoice() {
+  const btn = document.getElementById('voiceBtn');
+  const status = document.getElementById('voice-status');
+  isListening = !isListening;
+  if (isListening) {
+    btn.classList.add('listening');
+    btn.textContent = '🛑';
+    status.textContent = '🔴 جارٍ الاستماع... تحدث الآن';
+    setTimeout(() => {
+      isListening = false;
+      btn.classList.remove('listening');
+      btn.textContent = '🎙️';
+      status.textContent = '✅ تم استقبال الأمر! جارٍ المعالجة...';
+      setTimeout(() => { status.textContent = 'انقر للبدء في التحدث...'; }, 2500);
+    }, 3500);
+  } else {
+    btn.classList.remove('listening');
+    btn.textContent = '🎙️';
+    status.textContent = 'انقر للبدء في التحدث...';
+  }
+}
+
+// Chatbot
+function toggleChat() {
+  const win = document.getElementById('chatbot');
+  win.classList.toggle('open');
+}
+const botReplies = [
+  'شكراً على تواصلك! يمكنني مساعدتك في الحصول على توصية مهنية مخصصة عبر محرك المواءمة.',
+  'للتقديم على وظيفة، اذهب إلى قسم "البوابات" واختر "الباحثون عن عمل".',
+  'يمكنني تحليل مهاراتك واقتراح أفضل المجالات المهنية المناسبة لك.',
+  'منصة سَنَد تهدف لتمكين ذوي الإعاقة مهنياً وفق رؤية 2030. هل لديك سؤال محدد؟',
+  'للتواصل مع فريقنا البشري، يرجى ملء نموذج التواصل في أسفل الصفحة.',
+];
+let replyIdx = 0;
+function sendMsg() {
+  const input = document.getElementById('chat-input');
+  const msgs = document.getElementById('chat-messages');
+  if (!input.value.trim()) return;
+  msgs.innerHTML += `<div class="msg msg-user">${input.value}</div>`;
+  input.value = '';
+  setTimeout(() => {
+    msgs.innerHTML += `<div class="msg msg-bot">${botReplies[replyIdx % botReplies.length]}</div>`;
+    replyIdx++;
+    msgs.scrollTop = msgs.scrollHeight;
+  }, 700);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
