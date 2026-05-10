@@ -210,6 +210,19 @@ font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: all 0.2s;
 display: flex; align-items: center; justify-content: center; gap: 8px;
 }
 .toggle-btn:hover { background: #1a5c8a; color: #fff; border-color: #1a5c8a; }
+.emp-tab {
+padding: 7px 14px; border-radius: 8px; border: 1.5px solid #d0e4f0;
+background: transparent; color: #1a5c8a; font-family: ‘Cairo’, Tahoma, sans-serif;
+font-weight: 700; font-size: 0.82rem; cursor: pointer; transition: all 0.2s; flex:1;
+}
+.emp-tab:hover { background: #1a5c8a; color: #fff; border-color: #1a5c8a; }
+.active-tab { background: #27ae60 !important; color: #fff !important; border-color: #27ae60 !important; }
+.emp-tab-content { display: flex; flex-direction: column; gap: 10px; }
+.candidate-card {
+background: #f4f8fb; border: 1.5px solid #d0e4f0; border-radius: 12px; padding: 14px;
+transition: box-shadow 0.2s;
+}
+.candidate-card:hover { box-shadow: 0 4px 16px rgba(26,92,138,0.12); }
 .form-panel {
 display: none; margin-top: 20px; flex-direction: column; gap: 12px;
 }
@@ -224,7 +237,7 @@ transition: border-color 0.2s; outline: none;
 .submit-btn {
 padding: 12px; border-radius: 10px; border: none;
 background: #1a5c8a; color: #fff;
-font-family: ‘Cairo’, sans-serif; font-weight: 700;
+font-family: ‘Cairo’, Tahoma, sans-serif; font-weight: 700;
 font-size: 1rem; cursor: pointer; transition: background 0.2s;
 }
 .submit-btn:hover { background: #0f3d5e; }
@@ -616,17 +629,115 @@ transition: opacity 0.55s ease, transform 0.55s ease;
           </div>
         </div>
         <div class="portal-body">
-          <button class="toggle-btn" onclick="toggleForm('employer-form', this)" style="border-color:#27ae60; color:#27ae60;">📋 تسجيل المؤسسة</button>
-          <div class="form-panel" id="employer-form">
-            <input class="form-input" type="text" placeholder="اسم الشركة (مطلوب)"/>
-            <input class="form-input" type="tel" placeholder="رقم الهاتف (مطلوب)"/>
-            <input class="form-input" type="email" placeholder="البريد الإلكتروني (مطلوب)"/>
-            <textarea class="form-input" rows="3" placeholder="تفاصيل المؤسسة والفرص المتاحة..."></textarea>
-            <button class="submit-btn" style="background:#27ae60">تسجيل الشركة ✅</button>
+          <!-- Employer tabs -->
+          <div style="display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap;">
+            <button class="emp-tab active-tab" onclick="showEmpTab('register')" id="tab-register">📋 تسجيل المؤسسة</button>
+            <button class="emp-tab" onclick="showEmpTab('post')" id="tab-post">📢 نشر وظيفة</button>
+            <button class="emp-tab" onclick="showEmpTab('candidates')" id="tab-candidates">👥 المرشحون</button>
+          </div>
+
+```
+      <!-- Tab 1: Register -->
+      <div id="emp-register" class="emp-tab-content">
+        <input class="form-input" type="text" placeholder="اسم الشركة (مطلوب)"/>
+        <input class="form-input" type="tel" placeholder="رقم الهاتف (مطلوب)"/>
+        <input class="form-input" type="email" placeholder="البريد الإلكتروني (مطلوب)"/>
+        <select class="form-input">
+          <option value="">قطاع العمل</option>
+          <option>تقنية المعلومات</option>
+          <option>الصحة والطب</option>
+          <option>التعليم والتدريب</option>
+          <option>الخدمات المالية</option>
+          <option>الصناعة والإنتاج</option>
+          <option>أخرى</option>
+        </select>
+        <input class="form-input" type="number" placeholder="عدد الموظفين تقريباً"/>
+        <textarea class="form-input" rows="3" placeholder="نبذة عن المؤسسة وسياستها تجاه التوظيف الشامل..."></textarea>
+        <button class="submit-btn" style="background:#27ae60">تسجيل المؤسسة ✅</button>
+      </div>
+
+      <!-- Tab 2: Post Job -->
+      <div id="emp-post" class="emp-tab-content" style="display:none;">
+        <input class="form-input" type="text" placeholder="المسمى الوظيفي (مطلوب)"/>
+        <select class="form-input">
+          <option value="">المجال المهني</option>
+          <option>البرمجة والبيانات</option>
+          <option>الإدارة المكتبية</option>
+          <option>التصميم الجرافيكي</option>
+          <option>خدمة العملاء</option>
+          <option>الترجمة واللغات</option>
+        </select>
+        <select class="form-input">
+          <option value="">نوع الدوام</option>
+          <option>دوام كامل</option>
+          <option>دوام جزئي</option>
+          <option>عن بُعد</option>
+          <option>هجين</option>
+        </select>
+        <select class="form-input">
+          <option value="">بيئة العمل المهيأة لـ</option>
+          <option>إعاقة حركية</option>
+          <option>إعاقة بصرية</option>
+          <option>إعاقة سمعية</option>
+          <option>جميع الإعاقات</option>
+        </select>
+        <input class="form-input" type="text" placeholder="الراتب المتوقع (اختياري)"/>
+        <textarea class="form-input" rows="3" placeholder="وصف الوظيفة ومتطلباتها..."></textarea>
+        <button class="submit-btn" style="background:#27ae60">نشر الوظيفة 📢</button>
+      </div>
+
+      <!-- Tab 3: Candidates -->
+      <div id="emp-candidates" class="emp-tab-content" style="display:none;">
+        <div style="background:#f4f8fb; border-radius:10px; padding:14px; margin-bottom:12px;">
+          <div style="font-size:0.85rem; color:#5a6a7a; margin-bottom:10px;">🔍 فلتر المرشحين بحسب المجال:</div>
+          <select class="form-input" onchange="filterCandidates(this.value)" style="margin-bottom:10px;">
+            <option value="all">جميع المجالات</option>
+            <option value="برمجة">البرمجة والبيانات</option>
+            <option value="إدارة">الإدارة المكتبية</option>
+            <option value="تصميم">التصميم الجرافيكي</option>
+            <option value="ترجمة">الترجمة واللغات</option>
+          </select>
+        </div>
+        <div id="candidates-list">
+          <div class="candidate-card" data-field="برمجة">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <span style="font-weight:700; color:#1a2332;">م. أ — البرمجة والبيانات</span>
+              <span style="background:#27ae60; color:#fff; font-size:0.75rem; padding:3px 10px; border-radius:20px;">توافق 94%</span>
+            </div>
+            <div style="font-size:0.85rem; color:#5a6a7a;">إعاقة حركية | خبرة في Python وتحليل البيانات</div>
+            <button onclick="requestCandidate(this)" style="margin-top:10px; width:100%; padding:8px; background:#1a5c8a; color:#fff; border:none; border-radius:8px; cursor:pointer; font-family:inherit; font-size:0.9rem;">طلب التواصل 📩</button>
+          </div>
+          <div class="candidate-card" data-field="إدارة" style="margin-top:10px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <span style="font-weight:700; color:#1a2332;">ن. م — الإدارة المكتبية</span>
+              <span style="background:#27ae60; color:#fff; font-size:0.75rem; padding:3px 10px; border-radius:20px;">توافق 88%</span>
+            </div>
+            <div style="font-size:0.85rem; color:#5a6a7a;">إعاقة سمعية | خبرة في إدارة الملفات والأرشفة</div>
+            <button onclick="requestCandidate(this)" style="margin-top:10px; width:100%; padding:8px; background:#1a5c8a; color:#fff; border:none; border-radius:8px; cursor:pointer; font-family:inherit; font-size:0.9rem;">طلب التواصل 📩</button>
+          </div>
+          <div class="candidate-card" data-field="تصميم" style="margin-top:10px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <span style="font-weight:700; color:#1a2332;">س. ع — التصميم الجرافيكي</span>
+              <span style="background:#f39c12; color:#fff; font-size:0.75rem; padding:3px 10px; border-radius:20px;">توافق 79%</span>
+            </div>
+            <div style="font-size:0.85rem; color:#5a6a7a;">إعاقة بصرية جزئية | خبرة في Illustrator وCanva</div>
+            <button onclick="requestCandidate(this)" style="margin-top:10px; width:100%; padding:8px; background:#1a5c8a; color:#fff; border:none; border-radius:8px; cursor:pointer; font-family:inherit; font-size:0.9rem;">طلب التواصل 📩</button>
+          </div>
+          <div class="candidate-card" data-field="ترجمة" style="margin-top:10px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <span style="font-weight:700; color:#1a2332;">ف. ر — الترجمة واللغات</span>
+              <span style="background:#27ae60; color:#fff; font-size:0.75rem; padding:3px 10px; border-radius:20px;">توافق 91%</span>
+            </div>
+            <div style="font-size:0.85rem; color:#5a6a7a;">إعاقة حركية | إجادة العربية والإنجليزية والفرنسية</div>
+            <button onclick="requestCandidate(this)" style="margin-top:10px; width:100%; padding:8px; background:#1a5c8a; color:#fff; border:none; border-radius:8px; cursor:pointer; font-family:inherit; font-size:0.9rem;">طلب التواصل 📩</button>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
+```
+
   </div>
 </section>
 
@@ -643,29 +754,52 @@ transition: opacity 0.55s ease, transform 0.55s ease;
       <h3>🎯 تحليل المواءمة المهنية</h3>
       <p>أدخل بياناتك وسيقوم المحرك بتحليل أفضل الفرص المناسبة لك</p>
       <div class="dss-row">
-        <select class="dss-select" id="dss-challenge">
+        <select class="dss-select" id="dss-challenge" onchange="updateFields(this.value)">
           <option value="" style="color:#1a2332">— نوع التحدي —</option>
-          <option value="حركية" style="color:#1a2332">حركية</option>
-          <option value="بصرية" style="color:#1a2332">بصرية</option>
-          <option value="سمعية" style="color:#1a2332">سمعية</option>
-          <option value="ذهنية" style="color:#1a2332">ذهنية</option>
+          <optgroup label="الإعاقة الحركية" style="color:#1a2332">
+            <option value="حركية-كرسي" style="color:#1a2332">مستخدم كرسي متحرك</option>
+            <option value="حركية-بتر" style="color:#1a2332">بتر في الأطراف</option>
+            <option value="حركية-شلل" style="color:#1a2332">شلل جزئي</option>
+          </optgroup>
+          <optgroup label="الإعاقة البصرية" style="color:#1a2332">
+            <option value="بصرية-كلي" style="color:#1a2332">كف البصر الكلي</option>
+            <option value="بصرية-جزئي" style="color:#1a2332">ضعف البصر الجزئي</option>
+          </optgroup>
+          <optgroup label="الإعاقة السمعية" style="color:#1a2332">
+            <option value="سمعية-صمم" style="color:#1a2332">الصمم الكلي</option>
+            <option value="سمعية-ضعف" style="color:#1a2332">ضعف السمع</option>
+          </optgroup>
+          <optgroup label="الإعاقة الذهنية" style="color:#1a2332">
+            <option value="توحد" style="color:#1a2332">طيف التوحد (Autism)</option>
+            <option value="تعلم" style="color:#1a2332">صعوبات التعلم</option>
+            <option value="ذهنية-اخرى" style="color:#1a2332">إعاقة ذهنية أخرى</option>
+          </optgroup>
         </select>
         <select class="dss-select" id="dss-field">
           <option value="" style="color:#1a2332">— المجال المهني —</option>
-          <option value="البرمجة والبيانات" style="color:#1a2332">البرمجة والبيانات</option>
-          <option value="الإدارة المكتبية" style="color:#1a2332">الإدارة المكتبية</option>
-          <option value="التصميم الجرافيكي" style="color:#1a2332">التصميم الجرافيكي</option>
-          <option value="خدمة العملاء" style="color:#1a2332">خدمة العملاء (عن بُعد)</option>
-          <option value="الترجمة" style="color:#1a2332">الترجمة واللغات</option>
+          <option value="البرمجة والبيانات" style="color:#1a2332">💻 البرمجة وتحليل البيانات</option>
+          <option value="الإدارة المكتبية" style="color:#1a2332">🗂️ الإدارة المكتبية</option>
+          <option value="التصميم الجرافيكي" style="color:#1a2332">🎨 التصميم الجرافيكي</option>
+          <option value="خدمة العملاء" style="color:#1a2332">💬 خدمة العملاء (عن بُعد)</option>
+          <option value="الترجمة" style="color:#1a2332">🌐 الترجمة واللغات</option>
+          <option value="المحاسبة" style="color:#1a2332">📊 المحاسبة والمالية</option>
+          <option value="التسويق" style="color:#1a2332">📣 التسويق الرقمي</option>
+          <option value="الكتابة" style="color:#1a2332">✍️ الكتابة والتحرير</option>
         </select>
       </div>
-      <button class="dss-analyze" onclick="analyzeDSS()">🔍 تحليل وإصدار التوصية</button>
-      <div class="dss-result" id="dss-result">
-        <h4>📊 توصية سَنَد لاتخاذ القرار</h4>
-        <p id="dss-text"></p>
-        <button class="dss-apply" onclick="document.getElementById('seeker-form').classList.add('open'); document.getElementById('portals').scrollIntoView()">التقديم على هذه الوظيفة ←</button>
-      </div>
-    </div>
+
+```
+  <!-- Smart suggestion removed -->
+
+  <button class="dss-analyze" onclick="analyzeDSS()">🔍 تحليل وإصدار التوصية</button>
+  <div class="dss-result" id="dss-result">
+    <h4>📊 توصية سَنَد لاتخاذ القرار</h4>
+    <p id="dss-text"></p>
+    <button class="dss-apply" onclick="document.getElementById('seeker-form').classList.add('open'); document.getElementById('portals').scrollIntoView()">التقديم على هذه الوظيفة ←</button>
+  </div>
+</div>
+```
+
   </div>
 </section>
 
@@ -903,6 +1037,41 @@ transition: opacity 0.55s ease, transform 0.55s ease;
 </div>
 
 <script>
+// Employer Portal Tabs
+function showEmpTab(tab) {
+  try {
+    document.querySelectorAll('.emp-tab-content').forEach(function(el) { el.style.display = 'none'; });
+    document.querySelectorAll('.emp-tab').forEach(function(el) { el.classList.remove('active-tab'); });
+    var content = document.getElementById('emp-' + tab);
+    var tabBtn = document.getElementById('tab-' + tab);
+    if (content) content.style.display = 'flex';
+    if (tabBtn) tabBtn.classList.add('active-tab');
+  } catch(e) {}
+}
+
+// Filter Candidates
+function filterCandidates(field) {
+  try {
+    var cards = document.querySelectorAll('.candidate-card');
+    cards.forEach(function(card) {
+      if (field === 'all' || card.getAttribute('data-field') === field) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  } catch(e) {}
+}
+
+// Request Candidate Contact
+function requestCandidate(btn) {
+  try {
+    btn.textContent = '✅ تم إرسال طلب التواصل';
+    btn.style.background = '#27ae60';
+    btn.disabled = true;
+  } catch(e) {}
+}
+
 // Toggle form panels
 function toggleForm(id, btn) {
   const panel = document.getElementById(id);
@@ -910,26 +1079,74 @@ function toggleForm(id, btn) {
   btn.textContent = panel.classList.contains('open') ? '✖ إغلاق النموذج' : '📋 ' + (id === 'seeker-form' ? 'فتح نموذج التقديم' : 'تسجيل المؤسسة');
 }
 
+// DSS Smart Suggestion on disability selection
+function updateFields(challenge) {
+  try {
+    if (!challenge) challenge = '';
+    var suggestion = document.getElementById('dss-suggestion');
+    var suggText = document.getElementById('suggestion-text');
+    if (!suggestion || !suggText) return;
+    var suggestions = {
+      'توحد': '💡 أصحاب طيف التوحد يمتلكون تركيزاً استثنائياً وقدرات تحليلية نادرة — شركات مثل Microsoft وSAP تتسابق على توظيفهم. الأنسب: البرمجة وتحليل البيانات.',
+      'تعلم': '💡 أصحاب صعوبات التعلم غالباً يتميزون بالتفكير الإبداعي والتصميم. الأنسب: التصميم الجرافيكي والتسويق الرقمي.',
+      'بصرية-كلي': '💡 مع أدوات قارئ الشاشة، البرمجة والكتابة والترجمة متاحة بالكامل.',
+      'بصرية-جزئي': '💡 طيف واسع من المجالات متاح مع التكبير والأدوات المساعدة.',
+      'سمعية-صمم': '💡 البرمجة والتصميم والترجمة لا تتطلب تواصلاً صوتياً — نسب نجاح تتجاوز 90٪.',
+      'سمعية-ضعف': '💡 معظم المجالات متاحة مع بدائل تواصل كتابي ومرئي.',
+      'حركية-كرسي': '💡 العمل عن بُعد يمنحك مرونة كاملة. البرمجة والإدارة والتسويق الرقمي خيارات ممتازة.',
+      'حركية-بتر': '💡 وظائف التقنية والإدارة عن بُعد مثالية ولا تحتاج تنقلاً مستمراً.',
+      'حركية-شلل': '💡 الكتابة والترجمة والمحاسبة تناسب العمل من المنزل بالكامل.',
+    };
+    if (suggestions[challenge]) {
+      suggText.textContent = suggestions[challenge];
+      suggestion.style.display = 'block';
+    } else {
+      suggestion.style.display = 'none';
+    }
+  } catch(e) { console.log('suggestion error', e); }
+}
+
 // DSS Analysis
 function analyzeDSS() {
-  const challenge = document.getElementById('dss-challenge').value;
-  const field = document.getElementById('dss-field').value;
-  if (!challenge || !field) {
-    alert('الرجاء اختيار نوع التحدي والمجال المهني');
-    return;
-  }
-  const recommendations = {
-    'حركية-البرمجة والبيانات': 'بناءً على تحليل بيانات +200 حالة مشابهة، يُوصى بشدة بمجال البرمجة والبيانات لأصحاب الإعاقة الحركية. نسبة النجاح المتوقعة: 94٪. بيئة العمل عن بُعد تمنحك مرونة كاملة. التخصصات الأنسب: تحليل البيانات، تطوير الويب.',
-    'حركية-الإدارة المكتبية': 'الإدارة المكتبية خيار ممتاز مع تهيئة بيئة مناسبة. نسبة النجاح: 82٪. يُنصح بالعمل عن بُعد أو المكاتب المهيأة. تحقق من برنامج تهيئة بيئة العمل المتاح في المنصة.',
-    'بصرية-البرمجة والبيانات': 'التقنيات المساعدة كقارئات الشاشة تجعل البرمجة متاحة تماماً. نسبة النجاح: 79٪. يُوصى باستخدام بيئات التطوير المتوافقة مع إمكانية الوصول.',
-    'بصرية-الإدارة المكتبية': 'مع أدوات إمكانية الوصول المناسبة، الإدارة المكتبية خيار جيد. نسبة النجاح: 71٪. نوصي بتدريب مسبق على برامج العمل.',
-    'سمعية-البرمجة والبيانات': 'مجال البرمجة مثالي لأصحاب الإعاقة السمعية حيث لا تتطلب معظم المهام تواصلاً صوتياً. نسبة النجاح: 96٪. أعلى نسبة توافق في قاعدة بياناتنا!',
-    'سمعية-الإدارة المكتبية': 'الإدارة المكتبية مناسبة مع توفر بدائل تواصل كتابي ومرئي. نسبة النجاح: 88٪. تأكد من توفر بيئة داعمة في جهة العمل.',
-  };
-  const key = `${challenge}-${field}`;
-  const text = recommendations[key] || `بناءً على تحليل بياناتك (${challenge} + ${field})، يوجد توافق معقول. نوصي بالتواصل مع فريق سَنَد للحصول على تقييم أكثر تفصيلاً ومتابعة الفرص المتاحة في قاعدة بياناتنا.`;
-  document.getElementById('dss-text').textContent = text;
-  document.getElementById('dss-result').classList.add('show');
+  try {
+    var challenge = document.getElementById('dss-challenge').value;
+    var field = document.getElementById('dss-field').value;
+    if (!challenge || !field) {
+      alert('الرجاء اختيار نوع التحدي والمجال المهني');
+      return;
+    }
+    var recommendations = {
+      // حركية
+      'حركية-كرسي-البرمجة والبيانات': 'ممتاز! العمل عن بُعد في البرمجة يمنحك استقلالية كاملة. نسبة النجاح: 94٪. التخصصات الأنسب: Python، تحليل البيانات، تطوير الويب.',
+      'حركية-كرسي-التسويق': 'التسويق الرقمي من المنزل خيار مثالي. نسبة النجاح: 89٪. يمكنك إدارة حملات كاملة عن بُعد.',
+      'حركية-بتر-الإدارة المكتبية': 'الإدارة المكتبية عن بُعد خيار ممتاز. نسبة النجاح: 87٪. معظم المهام تعتمد على الحاسوب.',
+      // بصرية
+      'بصرية-كلي-البرمجة والبيانات': 'مع قارئات الشاشة، البرمجة متاحة بالكامل. نسبة النجاح: 81٪. يُنصح بـ VS Code مع إضافات إمكانية الوصول.',
+      'بصرية-كلي-الكتابة': 'الكتابة والتحرير مثالية مع قارئات الشاشة. نسبة النجاح: 92٪. من أعلى نسب التوافق لدينا.',
+      'بصرية-جزئي-الترجمة': 'الترجمة مناسبة جداً مع أدوات التكبير. نسبة النجاح: 88٪.',
+      // سمعية
+      'سمعية-صمم-البرمجة والبيانات': 'البرمجة مثالية لأصحاب الإعاقة السمعية — لا تتطلب تواصلاً صوتياً. نسبة النجاح: 96٪. أعلى نسبة في قاعدة بياناتنا!',
+      'سمعية-صمم-التصميم الجرافيكي': 'التصميم لا يحتاج تواصلاً صوتياً. نسبة النجاح: 93٪. مجال إبداعي بامتياز.',
+      'سمعية-ضعف-خدمة العملاء': 'خدمة العملاء عبر الكتابة ممكنة ومطلوبة. نسبة النجاح: 78٪. تأكد من توفر بيئة داعمة.',
+      // توحد
+      'توحد-البرمجة والبيانات': 'أصحاب طيف التوحد يتميزون بتركيز استثنائي في البرمجة. نسبة النجاح: 97٪. أعلى نسبة توافق في المنصة! شركات كـ Microsoft تبحث عنكم تحديداً.',
+      'توحد-المحاسبة': 'الدقة والانتباه للتفاصيل من مميزات طيف التوحد — المحاسبة مثالية. نسبة النجاح: 91٪.',
+      'توحد-الكتابة': 'كثير من أصحاب طيف التوحد كتّاب استثنائيون. نسبة النجاح: 85٪.',
+      // صعوبات التعلم
+      'تعلم-التصميم الجرافيكي': 'أصحاب صعوبات التعلم غالباً يمتلكون تفكيراً بصرياً إبداعياً. نسبة النجاح: 88٪.',
+      'تعلم-التسويق': 'التسويق الإبداعي يناسب أسلوب التفكير الغير تقليدي. نسبة النجاح: 83٪.',
+    };
+
+    // Build key
+    var type = challenge.split('-')[0];
+    var key1 = challenge + '-' + field;
+    var key2 = type + '-' + field;
+    var text = recommendations[key1] || recommendations[key2] ||
+      'بناءً على تحليل بياناتك، يوجد توافق معقول بين قدراتك وهذا المجال. نوصي بالتواصل مع فريق سَنَد للحصول على تقييم أكثر تفصيلاً ومتابعة الفرص المتاحة.';
+
+    document.getElementById('dss-text').textContent = text;
+    document.getElementById('dss-result').classList.add('show');
+  } catch(e) {}
 }
 
 // Voice Bot
@@ -991,4 +1208,4 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
 
 </body>
-</html>
+</html> 
